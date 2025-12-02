@@ -2,12 +2,14 @@
 
 A website for playing Jeopardy! together with friends over the Internet. Designed for computer browsers, although it's playable on mobile. If the UI/code looks familiar, much of it is copied from my other project, WatchParty: https://github.com/howardchung/watchparty
 
+This fork ships with a pre-built custom game in `public/final_game_export.csv`. The green **Start game** button in the Admin console will load that CSV by default, but you can still load J-Archive episodes or upload a different CSV in-app.
+
 ## Description
 
 - Implements the game show Jeopardy!, including the Jeopardy, Double Jeopardy, and Final Jeopardy rounds. Daily Doubles are also included.
 - Any archived episode of Jeopardy! can be loaded, with options for loading specific event games (e.g. College Championship)
-- Load games by episode number
-- Create your own custom game with a CSV file
+- Load games by episode number, or use the bundled custom game with **Start game**
+- Create your own custom game with a CSV file (see format below)
 - Supports creating multiple rooms for private/simultaneous games.
 - Text chat included
 
@@ -29,7 +31,24 @@ A website for playing Jeopardy! together with friends over the Internet. Designe
 ### Data:
 
 - Game data is from http://j-archive.com/
+- A personal custom set lives at `public/final_game_export.csv` and is loaded when no episode number/filter/custom upload is provided.
 - Games might be incomplete if some clues weren't revealed on the show.
+
+## Custom game CSV format
+
+Use the Admin console's **Custom game** button or overwrite `public/final_game_export.csv` to run your own board. CSV headers are:
+
+```
+round,cat,q,a,dd
+jeopardy,Category name,Clue text?,Correct response,false
+double,Another category,Clue text?,Correct response,true
+final,Final Category,Final clue text?,Correct response,false
+```
+
+- `round` supports `jeopardy`, `double`, or `final`.
+- `dd` marks Daily Doubles; any truthy value (e.g., `true`) is treated as a Daily Double.
+- Board values are auto-assigned in reading order per category; keep rows grouped by category to preserve clue ordering.
+- After editing `public/final_game_export.csv`, rebuild (`npm run buildReact`) before deploying so the updated file is served.
 
 ## Updating Clues:
 
