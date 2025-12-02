@@ -1,0 +1,60 @@
+{
+  "name": "jeopardy",
+  "version": "0.1.2",
+  "private": true,
+  "dependencies": {
+    "@hono/node-server": "^1.19.6",
+    "@mantine/core": "^8.3.6",
+    "@tabler/icons-react": "^3.35.0",
+    "dotenv": "^17.2.3",
+    "firebase": "^12.6.0",
+    "hono": "^4.10.4",
+    "ioredis": "^5.8.2",
+    "openai": "^5.1.1",
+    "papaparse": "^5.5.3",
+    "react": "^18.3.1",
+    "react-countup": "^6.5.3",
+    "react-dom": "^18.3.1",
+    "socket.io": "^4.8.1",
+    "socket.io-client": "^4.8.1"
+  },
+  "type": "module",
+  "scripts": {
+    "server": "node server/server.ts",
+    "ui": "vite --host",
+    "build": "npm run buildReact && npm run typecheckServer",
+    "buildReact": "vite build && npm run typecheck",
+    "typecheckServer": "tsc --project server/tsconfig.json",
+    "typecheck": "tsc --project src/tsconfig.json --noEmit",
+    "dev": "node --watch server/server.ts",
+    "prettier": "npx prettier --write .",
+    "analyze": "npx source-map-explorer 'build/assets/*.js' --html result.html --no-border-checks",
+    "updateEps": "curl -sSL -O https://github.com/howardchung/j-archive-parser/raw/release/jeopardy.json.gz"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@types/node": "^24.10.0",
+    "@types/papaparse": "^5.5.0",
+    "@types/react": "^18.3.18",
+    "@types/react-dom": "^18.3.5",
+    "typescript": "^5.9.3",
+    "vite": "^7.2.1"
+  },
+  "engines": {
+    "node": "24"
+  }
+}
